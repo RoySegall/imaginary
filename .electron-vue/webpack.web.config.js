@@ -10,6 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const TerserPlugin = require('terser-webpack-plugin');
 
 let webConfig = {
   devtool: '#cheap-module-eval-source-map',
@@ -90,6 +91,18 @@ let webConfig = {
         }
       }
     ]
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        sourceMap: true, // Must be set to true if using source-maps in production
+        terserOptions: {
+          compress: {
+            drop_console: false,
+          },
+        },
+      }),
+    ],
   },
   plugins: [
     new VueLoaderPlugin(),
