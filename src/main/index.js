@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron'
+import fs from 'fs';
 
 /**
  * Set `__static` path to static files in production
@@ -8,10 +9,13 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
-let mainWindow
+let mainWindow;
+
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
-  : `file://${__dirname}/index.html`
+  : `file://${__dirname}/index.html`;
+
+const files = [];
 
 function createWindow () {
   /**
@@ -25,7 +29,9 @@ function createWindow () {
       nodeIntegration: true,
       webSecurity: false,
     },
-  })
+  });
+
+  fs.writeFile("/tmp/imaginary2-open-with", JSON.stringify(files), function(err) {});
 
   mainWindow.loadURL(winURL)
 
@@ -33,6 +39,10 @@ function createWindow () {
     mainWindow = null
   })
 }
+
+app.on('open-file', (event, path) => {
+  files.push(path);
+});
 
 app.on('ready', createWindow)
 

@@ -92,18 +92,6 @@ let webConfig = {
       }
     ]
   },
-  optimization: {
-    minimizer: [
-      new TerserPlugin({
-        sourceMap: true, // Must be set to true if using source-maps in production
-        terserOptions: {
-          compress: {
-            drop_console: false,
-          },
-        },
-      }),
-    ],
-  },
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({filename: 'styles.css'}),

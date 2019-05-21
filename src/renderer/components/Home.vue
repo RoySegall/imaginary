@@ -9,10 +9,27 @@
 
 <script>
   const {dialog} = require('electron').remote;
+  import fs from 'fs';
 
   export default {
     name: 'home',
+    created() {
 
+      fs.readFile('/tmp/imaginary2-open-with', 'utf8', (err, data) => {
+        console.log(data);
+
+        const files = JSON.parse(data);
+
+        if (files.length === 0) {
+          return;
+        }
+
+        this.$store.commit('setImages', files);
+        this.$store.commit('setSelectedImage', {image: files[0], key: 0});
+        this.$router.push('view');
+      });
+
+    },
     methods: {
       selectFiles () {
 
