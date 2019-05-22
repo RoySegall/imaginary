@@ -6,7 +6,6 @@
 </template>
 
 <script>
-  const {dialog} = require('electron').remote;
   import ImageView from './ImagesView/ImageView';
   import ListOfImages from './ImagesView/ListOfImages';
 
@@ -14,6 +13,11 @@
   export default {
     name: 'images-view',
     components: { ImageView, ListOfImages },
+    created() {
+      if (this.$store.state.selectedImages.length === 0) {
+        this.$router.push('/');
+      }
+    },
     methods: {
     }
   }

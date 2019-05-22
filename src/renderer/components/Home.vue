@@ -16,7 +16,6 @@
     created() {
 
       fs.readFile('/tmp/imaginary2-open-with', 'utf8', (err, data) => {
-        console.log(data);
 
         const files = JSON.parse(data);
 
@@ -39,13 +38,11 @@
             {name: 'Images', extensions: ['jpg', 'png', 'gif']},
             {name: 'Movies', extensions: ['avi', 'mp4']},
           ],
-        })
+        });
 
         this.$store.commit('setImages', files)
         this.$store.commit('setSelectedImage', {image: files[0], key: 0})
         this.$router.push('view')
-
-        console.log(this.$store.state);
       }
     }
   }
@@ -60,7 +57,7 @@
         position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-25%, -100%);
+        transform: translate(-50%, -50%);
         font-size: 2.5em;
         display: inline-block;
         font-weight: 400;

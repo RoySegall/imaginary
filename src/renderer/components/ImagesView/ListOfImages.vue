@@ -131,8 +131,6 @@
         overflow-y: scroll;
         right: 1vw;
         left: 1vw;
-        scroll-behavior: smooth;
-
 
         &::-webkit-scrollbar {
             width: 0;
